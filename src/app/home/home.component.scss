@@ -1,0 +1,9 @@
+blockquote {
+  font-size: 1.4rem;
+  padding-left: 75px;
+
+  &::before {
+    font-size: 4rem;
+    top: -40px;
+  }
+}

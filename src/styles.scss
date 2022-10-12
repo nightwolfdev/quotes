@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+blockquote {
+  width: 100%;
+  margin: 2rem auto;
+  line-height: 1.6;
+  padding-top: 0;
+  padding-right: 30px;
+  padding-bottom: 0;
+  position: relative;
+  
+  &::before {
+    content: '\201C';
+    position: absolute;
+    left: 10px;
+  }
+
+  &::after {
+    content: '';
+  }
+
+  cite {
+    display: block;
+    font-style: normal;
+    margin-top: 1rem;
+
+    &::before {
+      content: '\2014\0020';
+    }
+  }
+}

@@ -1,0 +1,17 @@
+blockquote {
+  padding-left: 50px;
+  
+  &::before {
+    content: '\201C';
+    font-size: 2rem;
+    top: -20px;
+  }
+
+  div.tags {
+    margin-top: 0.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<h1>Authors</h1>
+
+<clr-datagrid *ngIf="authors$ | async as authors; else: loading">
+  <clr-dg-column [clrDgField]="'name'">Name</clr-dg-column>
+  <clr-dg-column>Description</clr-dg-column>
+  <clr-dg-column [clrDgField]="'quoteCount'" [clrDgColType]="'number'">Quotes</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let author of authors">
+    <clr-dg-cell><a [routerLink]="['/authors', author.slug, 'view']">{{ author.name }}</a></clr-dg-cell>
+    <clr-dg-cell>{{ author.description }}</clr-dg-cell>
+    <clr-dg-cell>{{ author.quoteCount }}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Authors per page</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+      of {{pagination.totalItems}} author<ng-container *ngIf="pagination.totalItems !== 1">s</ng-container>
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<ng-template #loading>
+  <div class="text-center">
+    <clr-spinner>Loading...</clr-spinner>
+  </div>
+</ng-template>

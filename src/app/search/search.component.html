@@ -1,0 +1,61 @@
+<h1>Quotes</h1>
+
+<form clrForm [formGroup]="form" (ngSubmit)="onSearch({ page: 1 })" autocomplete="off">
+  <clr-select-container>
+    <label for="author">Author</label>
+    <select clrSelect id="author" name="author" formControlName="author">
+      <option value="">All Authors</option>
+      <ng-container *ngIf="authors$ | async as authors">
+        <option *ngFor="let author of authors" [value]="author.slug">{{ author.name }}</option>
+      </ng-container>
+    </select>
+  </clr-select-container>
+
+  <clr-select-container>
+    <label for="tag">Tag</label>
+    <select clrSelect id="tag" name="tag" formControlName="tag">
+      <option value="">All Tags</option>
+      <ng-container *ngIf="tags$ | async as tags">
+        <option *ngFor="let tag of tags" [value]="tag.slug">{{ tag.name | titlecase }}</option>
+      </ng-container>
+    </select>
+  </clr-select-container>
+
+  <p>
+    <button type="submit" class="btn btn-primary" [clrLoading]="searchBtnState" [disabled]="!form.valid">Search</button>
+  </p>
+</form>
+
+<ng-container *ngIf="quoteList$ | async as quoteList">
+  <p class="text-center">
+    <ng-container *ngIf="quoteList.totalCount === 0 then: noQuotesFound; else: quoteCount"></ng-container>
+
+    <ng-template #noQuotesFound>No quotes found</ng-template>
+
+    <ng-template #quoteCount>
+      <ng-container *ngIf="quoteList.totalCount > quoteList.count">{{ quoteList.lastItemIndex === quoteList.count ? 1 : quoteList.page === quoteList.totalPages ? quoteList.totalCount - quoteList.count : quoteList.lastItemIndex - quoteList.count }} to {{ quoteList.lastItemIndex || quoteList.totalCount }} of</ng-container> {{ quoteList.totalCount }} quote<ng-container *ngIf="quoteList.totalCount !== 1">s</ng-container>
+    </ng-template>
+  </p>
+
+  <blockquote *ngFor="let quote of quoteList.results">
+    {{ quote.content }}
+
+    <div class="tags">
+      <span *ngFor="let tag of quote.tags" class="label label-light-blue clickable" (click)="onSearch({ author: form.get('author')?.value!, page: 1, tag })">{{ tag }}</span>
+    </div>
+
+    <cite><a [routerLink]="['/authors', quote.authorSlug, 'view']">{{ quote.author }}</a></cite>
+  </blockquote>
+
+  <div *ngIf="quoteList.totalPages > 1" class="clr-row clr-align-items-center clr-justify-content-center text-center">
+    <div class="clr-col-sm-12 clr-col-md-auto">
+      <button *ngIf="quoteList.page > 1" class="btn btn-primary btn-sm" (click)="onSearch({ page: quoteList.page - 1})">&laquo; Previous Page</button>
+    </div>
+    <div class="clr-col-sm-12 clr-col-md-2">
+      Page {{ quoteList.page }} of {{ quoteList.totalPages }}
+    </div>
+    <div class="clr-col-sm-12 clr-col-md-auto">
+      <button *ngIf="quoteList.lastItemIndex" class="btn btn-primary btn-sm" (click)="onSearch({ page: quoteList.page + 1 })">Next Page &raquo;</button>
+    </div>
+  </div>
+</ng-container>

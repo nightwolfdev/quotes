@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  apiServer: 'https://api.quotable.io',
   production: false
 };
 

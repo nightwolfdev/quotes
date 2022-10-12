@@ -1,0 +1,21 @@
+<ng-container *ngIf="randomQuote$ | async as randomQuote; else: loading">
+  <blockquote>
+    {{ randomQuote.content }}
+
+    <div class="tags">
+      <a routerLink="/search" [state]="{ tag }" *ngFor="let tag of randomQuote.tags" class="label label-light-blue clickable">{{ tag }}</a>
+    </div>
+
+    <cite><a [routerLink]="['/authors', randomQuote.author?.slug, 'view']">{{ randomQuote.author?.name }}</a></cite>
+  </blockquote>
+
+  <p class="text-center">
+    <button class="btn btn-primary" (click)="newQuote()">Random Quote</button>
+  </p>
+</ng-container>
+
+<ng-template #loading>
+  <div class="text-center">
+    <clr-spinner>Loading...</clr-spinner>
+  </div>
+</ng-template>
