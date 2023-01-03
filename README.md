@@ -2,7 +2,7 @@
 
 ![Quotes App](./src/assets/img/quotes-app.png)
 
-Quotes app using Angular, RxJS, TypeScript, and the Quotable API.
+Get a random quote. Search quotes by author and tag. View more details about each author.
 
 ## Getting Started
 
@@ -21,6 +21,7 @@ Quotes app using Angular, RxJS, TypeScript, and the Quotable API.
 
 * [Demo](https://nightwolf.dev/demos/quotes)
 * [Angular](https://angular.io)
+* [Clarity Design System](https://clarity.design)
 * [RxJS](https://rxjs.dev)
 * [TypeScript](https://www.typescriptlang.org)
 * [Quotable API](https://github.com/lukePeavey/quotable)
