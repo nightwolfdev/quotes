@@ -19,7 +19,7 @@ Get a random quote. Search quotes by author and tag. View more details about eac
 
 ## Links
 
-* [Demo](https://nightwolf.dev/demos/quotes)
+* [Demo](https://nightwolfdev.github.io/quotes)
 * [Angular](https://angular.io)
 * [Clarity Design System](https://clarity.design)
 * [RxJS](https://rxjs.dev)
